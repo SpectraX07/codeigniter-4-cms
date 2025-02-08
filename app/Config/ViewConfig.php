@@ -16,6 +16,7 @@ class ViewConfig extends BaseConfig
     ];
 
     public $adminViews = [
-        'login' => 'Views/admin/auth/login'
+        'login' => 'Views/admin/auth/login',
+        'dashboard' => 'Views/admin/dashboard/dashboard'
     ];
 }
