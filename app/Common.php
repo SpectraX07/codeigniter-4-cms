@@ -35,3 +35,22 @@ if (!function_exists('dependencies')) {
         return site_url("dependencies/{$fileName}");
     }
 }
+
+if (!function_exists('setFlashMessage')) {
+    /**
+     * Set flash message data.
+     *
+     * @param string $message The message to be flashed.
+     * @param string $title The title of the flash message. Default is 'Error'.
+     * @param string $messageType The type of the flash message. Default is 'error'.
+     * @return void
+     */
+    function setFlashMessage(string $message, string $title = 'Error', string $messageType = 'error'): void
+    {
+        session()->setFlashData([
+            'message' => $message,
+            'title' => $title,
+            'messageType' => $messageType
+        ]);
+    }
+}

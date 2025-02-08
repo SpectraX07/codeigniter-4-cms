@@ -3,8 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\Request;
-use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\AdministrationModel;
 
 class AuthController extends BaseController
 {
@@ -21,7 +20,7 @@ class AuthController extends BaseController
             'success' => false,
         ];
 
-        if (!$this->request->is('post') || !$this->request->isAJAX()) {
+        if (!$this->request->is('post')) {
             return $this->response->setStatusCode(400)->setJSON(['message' => 'Invalid request']);
         }
 
@@ -41,7 +40,7 @@ class AuthController extends BaseController
             ]);
         }
 
-        $auth = new AuthModel();
+        $auth = new AdministrationModel();
         $user = $auth->where($loginField, $emailOrUsername)->first();
 
         if (!$user || !password_verify($password, $user->password)) {
@@ -50,7 +49,6 @@ class AuthController extends BaseController
 
         $sessionData = [
             'id' => $user->id,
-            'profilePicture' => $user->profilePicture ? site_url('uploads/admin/' . $user->profilePicture) : uploadUrl(DEFAULT_DP),
             'name' => $user->name
         ];
         session()->set('adminData', $sessionData);
@@ -59,7 +57,7 @@ class AuthController extends BaseController
 
         // Determine redirect URL
         $referrer = session()->get('referUrl');
-        $redirectUrl = (!empty($referrer) && $referrer !== current_url()) ? $referrer : url_to('adminDashboard');
+        $redirectUrl = (!empty($referrer) && $referrer !== current_url()) ? $referrer : url_to('admin.dashboard');
         session()->remove('referUrl');
 
         return $this->response->setJSON([

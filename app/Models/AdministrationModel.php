@@ -9,7 +9,7 @@ class AdministrationModel extends Model
     protected $table = 'administration';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType = 'array';
+    protected $returnType = 'object';
     protected $useSoftDeletes = true;
 
     protected $allowedFields = [
