@@ -28,3 +28,10 @@ if (!function_exists('commonAsset')) {
         return site_url("common/{$fileName}");
     }
 }
+
+if (!function_exists('dependencies')) {
+    function dependencies(string $fileName = ''): string
+    {
+        return site_url("dependencies/{$fileName}");
+    }
+}

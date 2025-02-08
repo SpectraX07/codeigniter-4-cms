@@ -35,7 +35,8 @@
     <link rel="stylesheet" href="<?= adminAsset() ?>vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="<?= adminAsset() ?>vendor/libs/typeahead-js/typeahead.css" />
     <!-- Vendor -->
-    <link rel="stylesheet" href="<?= adminAsset() ?>vendor/libs/%40form-validation/form-validation.css" />
+    <link rel="stylesheet" href="<?= adminAsset() ?>vendor/libs/form-validation/form-validation.css" />
+    <link rel="stylesheet" href="<?= commonAsset(); ?>izitoast/iziToast.min.css" />
 
     <!-- Page CSS -->
     <!-- Page -->
@@ -54,12 +55,6 @@
 </head>
 
 <body>
-
-
-    <!-- ?PROD Only: Google Tag Manager (noscript) (Default ThemeSelection: GTM-5DDHKGP, PixInvent: GTM-5J3LMKC) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5J3LMKC" height="0" width="0" style="display: none; visibility: hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
     <!-- Content -->
 
     <div class="authentication-wrapper authentication-cover">
@@ -93,35 +88,34 @@
                     <h4 class="mb-1">Welcome to Vuexy! 👋</h4>
                     <p class="mb-6">Please sign-in to your account and start the adventure</p>
 
-                    <form id="formAuthentication" class="mb-6" action="https://demos.pixinvent.com/vuexy-html-admin-template/html/vertical-menu-template/index.html" method="GET">
-                        <div class="mb-6">
-                            <label for="email" class="form-label">Email or Username</label>
-                            <input type="text" class="form-control" id="email" name="email-username" placeholder="Enter your email or username" autofocus>
+                    <?= form_open(url_to('admin.doLogin'), ['class' => 'mb-6', 'id' => 'formLogin']); ?>
+
+                    <div class="mb-6">
+                        <label for="email" class="form-label">Email or Username</label>
+                        <input type="text" class="form-control" id="email" name="email-username" placeholder="Enter your email or username" autofocus>
+                    </div>
+                    <div class="mb-6 form-password-toggle">
+                        <label class="form-label" for="password">Password</label>
+                        <div class="input-group input-group-merge">
+                            <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
+                            <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                         </div>
-                        <div class="mb-6 form-password-toggle">
-                            <label class="form-label" for="password">Password</label>
-                            <div class="input-group input-group-merge">
-                                <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
-                                <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                    </div>
+                    <div class="my-8">
+                        <div class="d-flex justify-content-between">
+                            <div class="form-check mb-0 ms-2">
+                                <input class="form-check-input" type="checkbox" id="remember-me">
+                                <label class="form-check-label" for="remember-me">
+                                    Remember Me
+                                </label>
                             </div>
+                            <a href="auth-forgot-password-cover.html">
+                                <p class="mb-0">Forgot Password?</p>
+                            </a>
                         </div>
-                        <div class="my-8">
-                            <div class="d-flex justify-content-between">
-                                <div class="form-check mb-0 ms-2">
-                                    <input class="form-check-input" type="checkbox" id="remember-me">
-                                    <label class="form-check-label" for="remember-me">
-                                        Remember Me
-                                    </label>
-                                </div>
-                                <a href="auth-forgot-password-cover.html">
-                                    <p class="mb-0">Forgot Password?</p>
-                                </a>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary d-grid w-100">
-                            Sign in
-                        </button>
-                    </form>
+                    </div>
+                    <button type="submit" class="btn btn-primary d-grid w-100" id="submitButton">Sign in</button>
+                    <?= form_close(); ?>
 
                     <p class="text-center">
                         <span>New on our platform?</span>
@@ -167,18 +161,20 @@
     <script src="<?= adminAsset() ?>vendor/libs/i18n/i18n.js"></script>
     <script src="<?= adminAsset() ?>vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="<?= adminAsset() ?>vendor/js/menu.js"></script>
-    
+
     <!-- Vendors JS -->
-    <script src="<?= adminAsset() ?>vendor/libs/%40form-validation/popular.js"></script>
-    <script src="<?= adminAsset() ?>vendor/libs/%40form-validation/bootstrap5.js"></script>
-    <script src="<?= adminAsset() ?>vendor/libs/%40form-validation/auto-focus.js"></script>
+    <script src="<?= adminAsset() ?>vendor/libs/form-validation/popular.js"></script>
+    <script src="<?= adminAsset() ?>vendor/libs/form-validation/bootstrap5.js"></script>
+    <script src="<?= adminAsset() ?>vendor/libs/form-validation/auto-focus.js"></script>
 
     <!-- Main JS -->
     <script src="<?= adminAsset() ?>js/main.js"></script>
 
 
     <!-- Page JS -->
-    <script src="<?= adminAsset() ?>js/pages-auth.js"></script>
+    <script src="<?= commonAsset() ?>izitoast/iziToast.min.js"></script>
+    <script src="<?= commonAsset(); ?>scripts.js?v=<?= filemtime('common/scripts.js'); ?>"></script>
+    <script src="<?= dependencies('admin/auth.js'); ?>"></script>
 
 </body>
 

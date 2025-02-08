@@ -10,7 +10,8 @@ use App\Controllers\Admin\{
  */
 
 $routes->group('admin', static function ($routes) {
-    $routes->get('/', [AuthController::class, 'renderLogin'], ['as' => 'login']);
+    $routes->get('/', [AuthController::class, 'renderLogin'], ['as' => 'admin.login']);
+    $routes->post('auth/attemptLogin', [AuthController::class, 'attemptToLogin'], ['as' => 'admin.doLogin']);
 });
 
 
