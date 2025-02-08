@@ -13,3 +13,18 @@
  *
  * @see: https://codeigniter.com/user_guide/extending/common.html
  */
+
+
+if (!function_exists('adminAsset')) {
+    function adminAsset(string $url = ''): string
+    {
+        return site_url("backend/$url");
+    }
+}
+
+if (!function_exists('commonAsset')) {
+    function commonAsset(string $fileName = ''): string
+    {
+        return site_url("common/{$fileName}");
+    }
+}
