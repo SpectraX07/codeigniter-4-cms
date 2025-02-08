@@ -54,3 +54,17 @@ if (!function_exists('setFlashMessage')) {
         ]);
     }
 }
+
+if (!function_exists('uploadUrl')) {
+    function uploadUrl(string $fileName = ''): string
+    {
+        return site_url("uploads/{$fileName}");
+    }
+}
+
+if (!function_exists('adminUrl')) {
+    function adminUrl(string $urlPart = ''): string
+    {
+        return site_url(ADMIN_URL . "/{$urlPart}");
+    }
+}
